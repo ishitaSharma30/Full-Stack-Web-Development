@@ -2,19 +2,20 @@
 include('config.php');
 ?>
 
-<?php 
-if (isset($_POST['btn'])){
- echo "Dear, ".$_POST['username']." Your are welcome".'<br>';
- $username = $_POST['username'];
- $age = $_POST['age'];
- $contact = $_POST['contact'];
- $email = $_POST['email'];
+<?php
+$sql = "SELECT * FROM `users`";
+$result = mysqli_query($conn, $sql);
 
-	$sql = "INSERT INTO users (name, age, contact, email)
-	VALUES ('$username', '$age', '$contact', '$email')";
-	mysqli_query($conn, $sql);	
+if($result->num_rows > 0)
+{
+	while($data = $result->fetch_assoc())
+	{
+	echo 'id - '.$data['id'].'<br>';
+	echo 'Name - '.$data['name'].'<br>';
+	echo 'Age - '.$data['age'].'<br>';
+	echo 'Contact - '.$data['contact'].'<br>';
+	echo 'Email - '.$data['email'].'<br>';
 }
- else{
-	echo "Welcome Guest";
+
 }
 ?>
